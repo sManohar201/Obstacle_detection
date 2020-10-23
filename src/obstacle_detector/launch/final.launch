@@ -1,0 +1,10 @@
+<!-- Launch file brings all the necessary nodes for obstacle detection and identification  -->
+<Launch> 
+    <param name="use_sim_time" value="true" />
+    <!-- create a node which plays a prerecorded laser scan bag file -->
+    <node name="scans_demo" pkg="rosbag" type="play" output="screen" 
+            args="--clock --loop $(find obstacle_detection)/resources/scans_demo.bag" />
+    
+    <!-- bring rviz to visualize the laser scan data -->
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" />
+</launch>
