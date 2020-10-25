@@ -1,0 +1,17 @@
+<!-- Launch file brings all the necessary nodes for obstacle detection and identification  -->
+<launch> 
+    <param name="use_sim_time" value="true" />
+    <!-- create a node which plays a prerecorded laser scan bag file -->
+    <node name="scans_demo" pkg="rosbag" type="play" output="screen" 
+            args="--clock --loop $(find obstacle_detection)/resources/scans_demo.bag" />
+
+     <!-- create static transforms for the published laser scan data  -->
+     <node name="map_to_scan_base" pkg="tf2_ros" type="static_transform_publisher"
+        args="0 0 0 0 0 0 map robot" />
+    <node name="scan_base_to_front_scan" pkg="tf2_ros" type="static_transform_publisher"
+        args="0.23565 -0.0005 0.06795 0 0 0 robot front_scanner" />
+    <node name="scan_base_to_rear_scan" pkg="tf2_ros" type="static_transform_publisher" 
+        args="-0.23832 0.00542 0.09888 3.141592 0 0 robot rear_scanner" />
+    <!-- bring rviz to visualize the laser scan data -->
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" />
+</launch>
