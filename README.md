@@ -14,7 +14,7 @@ Obstacle detection package can be used to track and identify obstacles.
 ### Concepts to learn
 
 - [ ] nodelet plugins, nodelet
-- [ ] rviz plugins
+- [ ] rviz plugins, visualization marker
 - [ ] tf
 - [ ] geometry_msgs
 
