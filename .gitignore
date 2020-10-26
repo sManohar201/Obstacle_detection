@@ -53,3 +53,4 @@ CATKIN_IGNORE
 # vscode files
 /.vscode
 /.catkin_tools
+/src/obstacle_detection/.vscode
