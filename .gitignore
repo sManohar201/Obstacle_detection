@@ -54,3 +54,4 @@ CATKIN_IGNORE
 /.vscode
 /.catkin_tools
 /src/obstacle_detection/.vscode
+/src/obstacle_detection/.vscode/c_cpp_properties.json
