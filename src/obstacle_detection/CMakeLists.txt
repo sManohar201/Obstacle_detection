@@ -4,6 +4,8 @@ project(obstacle_detection)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
+set(CMAKE_CXX_STANDARD 11)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -21,6 +23,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_srvs
   tf
 )
+find_package(Armadillo REQUIRED)
+find_package(Boost 1.54.0 REQUIRED system)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -77,10 +81,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   geometry_msgs#   sensor_msgs#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  geometry_msgs#
+  std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -112,9 +117,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES Obstacle_detector
-#  CATKIN_DEPENDS geometry_msgs laser_geometry message_generation message_runtime nodelet roscpp roslaunch rviz sensor_msgs std_msgs std_srvs tf
+ INCLUDE_DIRS include
+ LIBRARIES scan_merger 
+ CATKIN_DEPENDS geometry_msgs laser_geometry message_generation message_runtime nodelet roscpp roslaunch rviz sensor_msgs std_msgs std_srvs tf
 #  DEPENDS system_lib
 )
 
@@ -129,6 +134,12 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_library(scan_merger src/scan_merger.cpp)
+target_link_libraries(scan_merger ${catkin_LIBRARIES})
+add_dependencies(scan_merger ${catkin_EXPORTED_TARGETS})
+
+# add_executable(scan_merger_node src/nodes/scan_merger_node.cpp)
+# target_link_libraries(scan_merger_node scan_merger) 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/Obstacle_detector.cpp
