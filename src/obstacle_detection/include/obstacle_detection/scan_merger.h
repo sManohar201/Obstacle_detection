@@ -20,8 +20,7 @@ namespace obstacle_detection {
         private:
             bool updateParams(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
             void frontScanCallback(const sensor_msgs::LaserScan::ConstPtr front_scan);
-            void rearScanCallback(const sensor_msgs::LaserScan::ConstPtr rear_scan):
-
+            void rearScanCallback(const sensor_msgs::LaserScan::ConstPtr rear_scan);
             void initialize() {
                 std_srvs::Empty empty;
                 this->updateParams(empty.request, empty.response);
@@ -71,4 +70,4 @@ namespace obstacle_detection {
 }
 
 
-#endif SCAN_MERGER_H
+#endif 
